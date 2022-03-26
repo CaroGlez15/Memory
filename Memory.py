@@ -62,7 +62,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x +11, y+8) # Esto hará que los números queden centrados en el cuadro. 
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
