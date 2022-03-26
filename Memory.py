@@ -3,6 +3,7 @@ from turtle import *
 
 from freegames import path
 
+cont = {'cero' : 0, 'uno': 0}
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
@@ -39,10 +40,12 @@ def tap(x, y):
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        cont['cero'] = cont['cero']+1 # Agrega 1 al contador de taps por cada tap
     else:
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        cont['uno'] = cont['uno'] + 1 # Agrega 1 al contador para saber si el juego ya está terminado
 
 
 def draw():
@@ -67,6 +70,16 @@ def draw():
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
     update()
+    up()
+    goto(-340,190)
+    down()
+    write("Taps: = " + str(cont['cero']), font=('Arial', 10, 'normal'))
+    up()
+    if cont['uno'] > 31:
+            goto(220,190)
+            down()
+            write("YOU WIN", font=('Arial', 30, 'normal'))
+            up()
     ontimer(draw, 100)
 
 
